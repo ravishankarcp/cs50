@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="60">
+    <title>Nifty Options Volume</title>
+    <style>
+        body { font-family: sans-serif; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #dddddd; text-align: right; padding: 8px; }
+        th { background-color: #f2f2f2; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .row-header { text-align: left; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Nifty Options Volume</h1>
+
+    {% if strikes %}
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                {% for strike in strikes %}
+                <th>{{ strike }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="row-header">CE Volume</td>
+                {% for volume in ce_volumes %}
+                <td>{{ "{:,}".format(volume) }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td class="row-header">PE Volume</td>
+                {% for volume in pe_volumes %}
+                <td>{{ "{:,}".format(volume) }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    <p>This page will refresh automatically in 60 seconds.</p>
+    {% else %}
+    <p>No data available yet. Please wait for the data fetcher to run.</p>
+    {% endif %}
+
+</body>
+</html>
